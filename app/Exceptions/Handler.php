@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -36,6 +37,11 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+        $this->renderable(function (TokenExpiredException $e, $request) {
+            return response()->json([
+                'message' => "Token Expired"
+            ],403);
         });
     }
 }

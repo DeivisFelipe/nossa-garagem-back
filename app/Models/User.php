@@ -26,6 +26,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
@@ -39,6 +40,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $hidden = [
         'password',
+        'id',
     ];
 
     /**
@@ -49,6 +51,22 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function garages(){
+        return $this->hasMany(Garage::class);
+    }
+
+    public function adresses(){
+        return $this->hasMany(Address::class);
+    }
+
+    public function favorites(){
+        return $this->belongsToMany(Garage::class, "favorites");
+    }
+
+    public function isAdmin(){
+        return false;
+    }
 
 
     /**

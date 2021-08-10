@@ -14,7 +14,7 @@ class CreateGaragesTable extends Migration
     public function up()
     {
         Schema::create('garages', function (Blueprint $table) {
-            $table->integer('id')->primary();
+            $table->integer('id', true);
             $table->integer('user_id')->index('user_garage_idx');
             $table->integer('address_id')->index('address_garage_idx');
             $table->string('image');

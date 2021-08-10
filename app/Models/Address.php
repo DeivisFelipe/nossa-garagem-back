@@ -21,10 +21,23 @@ class Address extends Model
      *
      * @var array
      */
-    protected $fillable = ['cep', 'state', 'city', 'neighborhood', 'street', 'number', 'complement'];
+    protected $fillable = ['cep', 'street', 'city', 'number', 'user_id'];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'user_id',
+    ];
 
     public function user(){
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function gareges(){
+        return $this->hasMany(Garage::class);
     }
 
 }
